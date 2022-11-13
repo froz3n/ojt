@@ -27,8 +27,8 @@ class PurchaseLineOrder(models.Model):
     def get_diffs(self):
         for line in self:
             if line.list_price and line.std_price :
-                diffs = line.std_price - line.list_price
+                diffs = line.list_price - line.std_price
                 line.price_diffs = diffs
             else :
-                diffs = self.std_price - self.list_price
+                diffs = self.list_price - self.std_price
                 self.price_diffs = diffs
