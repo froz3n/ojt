@@ -25,7 +25,6 @@ class PurchaseLineOrder(models.Model):
 
     @api.depends('list_price','std_price')
     def get_diffs(self):
-        # print("SELF        :  "+str(self))
         for line in self:
             if line.list_price and line.std_price :
                 diffs = line.std_price - line.list_price
