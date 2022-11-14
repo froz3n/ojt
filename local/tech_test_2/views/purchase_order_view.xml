@@ -18,9 +18,10 @@
            <field name="partner_ref" position="after">
                 <field name="vendor_email" widget="email" />
            </field>
-           <field name="price_unit" position="after">
+           <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="list_price" />
                 <field name="price_diffs" />
-           </field>
+           </xpath>
         </field>
     </record>
     <record id="view_purchase_order_tree_inherit" model="ir.ui.view">
@@ -32,6 +33,12 @@
            <field name="partner_id" position="after">
                 <field name="vendor_email" widget="email" />
            </field>
+            <xpath expr="//field[@name='amount_total']" position="attributes">
+               <attribute name="invisible">True</attribute>
+            </xpath>
+           <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="total" widget='monetary' options="{'currency_field': 'currency_id'}" decoration-bf="1"/>
+            </xpath>
         </field>
     </record>
 </odoo>

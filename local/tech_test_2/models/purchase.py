@@ -13,22 +13,18 @@ class PurchaseOrder(models.Model):
 
     @api.depends('amount_total','down_payment')
     def get_total(self):
-        totals = self.amount_total - self.down_payment
-        self.total = totals
+        for line in self:
+            totals = line.amount_total - line.down_payment
+            line.total = totals
         
 class PurchaseLineOrder(models.Model):
     _inherit = "purchase.order.line"
 
-    price_diffs = fields.Float(string="Difference w/ Sale Price",compute="get_diffs")
-    list_price = fields.Float(related="product_id.lst_price")
-    std_price = fields.Float(related="price_unit")
+    price_diffs = fields.Float(string="Price Difference",compute="get_diffs")
+    list_price = fields.Float(string="Cost Price",related="product_id.standard_price")
 
-    @api.depends('list_price','std_price')
+    @api.depends('list_price','price_unit')
     def get_diffs(self):
         for line in self:
-            if line.list_price and line.std_price :
-                diffs = line.list_price - line.std_price
-                line.price_diffs = diffs
-            else :
-                diffs = self.list_price - self.std_price
-                self.price_diffs = diffs
+            diffs = line.list_price - line.price_unit
+            line.price_diffs = diffs
