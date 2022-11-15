@@ -7,8 +7,8 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <field name="sale_warehouse" attrs="{'invisible':[('sale_warehouse_all','=',True)]}"/>
-                <field name="sale_warehouse_all" attrs="{'invisible':[('sale_warehouse','!=',False)]}"/>
+                <field name="sale_warehouse_id" attrs="{'invisible':[('sale_warehouse_all','=',True)]}"/>
+                <field name="sale_warehouse_all" attrs="{'invisible':[('sale_warehouse_id','!=',False)]}"/>
             </field>
         </field>
     </record>
