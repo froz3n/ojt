@@ -11,9 +11,9 @@ class SaleOrder(models.Model):
     sale_pr_service = fields.Float(string='Service',compute='get_total_per_type')
     sale_pr_stockable = fields.Float(string='Stockable Product',compute='get_total_per_type')
 
-    sale_pr_consumable_exist = fields.Boolean(default=False)
-    sale_pr_service_exist = fields.Boolean(default=False)
-    sale_pr_stockable_exist = fields.Boolean(default=False)
+    sale_pr_consumable_exist = fields.Boolean(compute='is_type_exist')
+    sale_pr_service_exist = fields.Boolean(compute='is_type_exist')
+    sale_pr_stockable_exist = fields.Boolean(compute='is_type_exist')
 
     @api.depends('order_line.price_subtotal')
     def get_total_per_type(self):
@@ -32,6 +32,19 @@ class SaleOrder(models.Model):
                 'sale_pr_stockable' : sale_pr_stockable,
             })
                 
-    # @api.@api.onchange('')
-    # def _onchange_(self):
-    #     pass
+    @api.depends('order_line.order_id')
+    def is_type_exist(self):
+        for order in self:
+            sale_pr_consumable_exist = sale_pr_service_exist = sale_pr_stockable_exist = False
+            for line in order.order_line:
+                if line.product_id.type == 'consu':
+                    sale_pr_consumable_exist = True
+                if line.product_id.type == 'service':
+                    sale_pr_service_exist = True
+                if line.product_id.type == 'product':
+                    sale_pr_stockable_exist = True
+            order.update({
+                'sale_pr_consumable_exist' : sale_pr_consumable_exist,
+                'sale_pr_service_exist' : sale_pr_service_exist,
+                'sale_pr_stockable_exist' : sale_pr_stockable_exist,
+            })
