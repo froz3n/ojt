@@ -13,7 +13,6 @@
                 <field name="sale_pr_service_exist" invisible='True'/>
                 <field name="sale_pr_stockable" widget='monetary' options="{'currency_field': 'currency_id'}" attrs="{'invisible':[('sale_pr_stockable_exist','!=',True)]}"/>
                 <field name="sale_pr_stockable_exist" invisible='True'/>
-                <div class="oe_subtotal_footer_separator oe_inline o_td_label" attrs="{'invisible':['|',('sale_pr_consumable_exist','!=',True),('sale_pr_service_exist','!=',True),('sale_pr_stockable_exist','!=',True)]}"/>
             </field>
         </field>
     </record>
