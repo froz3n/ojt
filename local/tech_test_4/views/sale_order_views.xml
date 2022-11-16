@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>   
+    <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field name="sale_pr_consumable" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <field name="sale_pr_service" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <field name="sale_pr_stockable" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <div class="oe_subtotal_footer_separator oe_inline o_td_label" />
+            </field>
+        </field>
+    </record>
+</odoo>
