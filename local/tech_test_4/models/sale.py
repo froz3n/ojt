@@ -7,13 +7,13 @@ from datetime import datetime,timedelta
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    sale_pr_consumable = fields.Float(string='Consumable',compute='get_total_per_type')
-    sale_pr_service = fields.Float(string='Service',compute='get_total_per_type')
-    sale_pr_stockable = fields.Float(string='Stockable Product',compute='get_total_per_type')
+    sale_pr_consumable = fields.Float(string='Consumable', readonly=True)
+    sale_pr_service = fields.Float(string='Service', readonly=True)
+    sale_pr_stockable = fields.Float(string='Stockable Product', readonly=True)
 
-    sale_pr_consumable_exist = fields.Boolean(compute='get_total_per_type')
-    sale_pr_service_exist = fields.Boolean(compute='get_total_per_type')
-    sale_pr_stockable_exist = fields.Boolean(compute='get_total_per_type')
+    sale_pr_consumable_exist = fields.Boolean(default=False, readonly=True)
+    sale_pr_service_exist = fields.Boolean(default=False, readonly=True)
+    sale_pr_stockable_exist = fields.Boolean(default=False, readonly=True)
         
     @api.onchange('order_line')
     def get_total_per_type(self):
