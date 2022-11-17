@@ -15,7 +15,7 @@
         'reports/purchase_reports.xml'
     ],
     "depends": [
-        "base","purchase","tech_test_2","contacts"
+        "purchase","tech_test_2"
     ],
     'installable': True,
     "images":['static/logo.png'],
