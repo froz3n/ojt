@@ -52,7 +52,7 @@
                                     <span t-field="line.product_id.default_code"/>                                        
                                 </t>
                                 <t t-else="">                                        
-                                    <span t-field="line.product_id.type"/>
+                                    <span t-field="line.name"/>
                                 </t>
                             </td>
                             <td name="td_taxes">
@@ -126,13 +126,15 @@
                                 t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                         </td>
                     </tr>
-                    <tr>                        
-                        <td name="td_dp_label">Down Payment</td>
-                        <td class="text-right">
-                            <span t-field="o.down_payment"
-                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                        </td>
-                    </tr>
+                    <t t-if="o.down_payment">
+                        <tr>                        
+                            <td name="td_dp_label">Down Payment</td>
+                            <td class="text-right">
+                                <span t-field="o.down_payment"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>                        
+                    </t>
                     <tr class="border-black o_total">
                         <td name="td_total_label"><strong>Total</strong></td>
                         <td class="text-right">
