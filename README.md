@@ -14,4 +14,4 @@ Simple odoo 14.0 modules from OJT training
 ## tech_test_5
 - Depend on tech_test_2
 - Make a custom report with new fields from tech_test_2
-- Change date format to dd?MM/yyyy
+- Change date format to dd/MM/yyyy
